@@ -27,6 +27,7 @@
 This is a layman's guide to writing instructions ("prompts") for AI that actually hold up in day to day use. It's aimed at anyone writing or reviewing AI instructions or learning to write them well. No technical background is required and it teaches you the tech if you dig deeper.
 
 Each chapter has a single rule, a brief summary of it, and below that I've provided 3 sections.
+At the end of the document is a block you can use to help your own LLMs and Agents write better prompts or memories.
 
 ### The Shallow End
 
@@ -465,3 +466,73 @@ The fixed set of tokens a model can read and write, decided when its tokenizer i
 **YaRN**
 
 A method for extending a model's usable context beyond the length it was trained on. Short for yet another RoPE extensioN, it rescales RoPE's rotation frequencies unevenly, leaving the fine-grained high-frequency components largely intact while stretching the coarse ones, and adjusts attention to match, so quality holds up at several times the original length. It is what people mean when they say a model was extended to a longer context. The name is not me being flippant; the researchers really did call it Yet Another RoPE extensioN, and the weariness in that is its own small documentation. 
+
+```
+# Prompt Authoring Instructions for AI
+
+## Purpose
+
+This document instructs an AI on how to write prompts. Apply it whenever you draft, revise, or review a prompt. It is complete on its own: every term, principle, and step you need is defined below.
+
+## Definitions
+
+These four terms carry precise meanings that the principles and verification checklist depend on.
+
+- **Positive specification**: an instruction stated as the behavior to perform.
+- **Standing reason**: a justification that holds true in every situation where its rule applies, stated as a general principle.
+- **Technical safeguard**: an enforcement mechanism built into the software around the model — a permission check, a human approval step, or a restricted set of available actions — that operates independently of how the model reads or weighs any wording.
+- **Self-contained**: fully actionable by a stranger whose only context is this one document.
+
+## The Eight Principles
+
+Apply all eight to every prompt you write.
+
+**1. State each instruction as the behavior to perform.**
+Write every rule as a direct description of the desired action, output, or scope. Small negating function words receive little attention weight and can drop out of effect, while naming a behavior activates the model's internal representation of it and raises the odds of producing it. Positive specification keeps the idea you activate and the outcome you want identical.
+
+**2. Make the prompt self-contained.**
+Write every term, format, example, and decision the model needs into the prompt itself. A model begins each request holding only the text in front of it, and it fills any gap with a plausible invention presented as fact. Test each prompt against the definition of self-contained above.
+
+**3. Give standing reasons.**
+When a rule benefits from a why, phrase the reason as a general principle stating the underlying cost or benefit. A standing reason travels with the rule into situations the author left unnamed, and it survives future edits because the rule and its justification live in a single sentence.
+
+**4. Number ordered procedures.**
+When a task must happen in a specific order: number every step, state the total, make each step one complete action that finishes before the next begins, and end with a verification step confirming every earlier step was completed. Written numbering turns the plan into visible tokens the model can count itself against, and the closing verification forces a reread in which a skipped step becomes visible text.
+
+**5. Word rules with calibrated force.**
+Write each rule as a clear, strong instruction in plain sentence case. A prompt shifts the probability of behavior; calibrated wording keeps everyone's expectations aligned with that reality and keeps attention on principle 6 for the cases where certainty is required.
+
+**6. Put critical protections in technical safeguards.**
+For any action that is irreversible, or where a single failure causes serious harm, require a technical safeguard and record which one applies. Reserve the prompt for judgment guidance. A safeguard holds in exactly the situations where wording gives way: long contexts, competing instructions, and hostile input arriving through the text the model reads.
+
+**7. Include only what is true every time.**
+Every sentence in a prompt must hold in all its uses. Leave situational decisions to the model at run time. Each token competes with every other for attention, so a lean prompt gives full weight to the rules that always matter, and rules that always hold stay consistent with each other. Match the task to the model's capability; when a task exceeds it, shrink the task or use a stronger model.
+
+**8. Repair by replacement.**
+When revising a prompt, delete superseded wording entirely and write the current target in its place. Every line present in a prompt is a pattern the model can imitate, whatever label sits beside it, so the finished prompt contains only wording you want reproduced.
+
+## Authoring Procedure
+
+Follow these seven steps in order. Each step is a single, complete action.
+
+1. **Step 1 of 7 — Collect requirements.** Write down the task, the target model, the output format, and every decision the prompt must fix in advance.
+2. **Step 2 of 7 — Sort the constraints.** Assign each requirement to one of two lists: judgment guidance, which goes in the prompt, or critical protection, which is flagged for a technical safeguard with the specific mechanism named (principle 6).
+3. **Step 3 of 7 — Draft with positive specification.** Write every instruction as the behavior to perform (principle 1), admitting only requirements that are true in every use (principle 7).
+4. **Step 4 of 7 — Attach standing reasons.** Add a general-principle reason to each rule whose purpose is unclear from its wording alone (principle 3).
+5. **Step 5 of 7 — Structure ordered work.** Convert each order-dependent task inside the prompt into numbered steps with a stated total and a closing verification step (principle 4).
+6. **Step 6 of 7 — Make it stand alone.** Define every term, embed every format and example, and confirm the prompt passes the self-contained test (principle 2).
+7. **Step 7 of 7 — Verify.** Reread the finished prompt and confirm each item below is true:
+   - Every instruction states a behavior to perform.
+   - Every term, format, and example the model needs appears in the prompt.
+   - Every stated reason is a general principle.
+   - Every ordered task is numbered, states its total, and ends with verification.
+   - Every rule is worded with calibrated force in plain sentence case.
+   - Every irreversible or high-harm action has a named technical safeguard.
+   - Every sentence is true in all uses of the prompt.
+   - The prompt contains only current, intended wording.
+   - Steps 1 through 6 of this procedure were each completed.
+
+## Scope of This Document
+
+Following this document makes well-formed prompts the reliable outcome. For any outcome that must hold every single time, a technical safeguard is the mechanism that provides it.
+```
