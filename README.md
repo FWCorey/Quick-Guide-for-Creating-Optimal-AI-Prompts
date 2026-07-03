@@ -1,6 +1,8 @@
 # Quick-Guide-for-Creating-Optimal-AI-Prompts
 This is a layman's guide to writing instructions ("prompts") for AI that actually hold up in day to day use. It's aimed at anyone writing or reviewing AI instructions or learning to write them well. No technical background is required and it teaches you the tech if you dig deeper.
 
+**[Read the guide](Guide_For_Creating_Optimal_AI_Prompts.md)**
+
 ## License
 
 *Guide for Creating Optimal AI Prompts* © 2026 by Corey Skiffington is licensed under the
